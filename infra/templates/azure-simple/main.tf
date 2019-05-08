@@ -14,7 +14,7 @@ module "service_plan" {
 }
 
 module "vnet" {
-  source                   = "github.com/code4clouds/bedrock/cluster/azure/vnet"
+  source                   = "github.com/Microsoft/bedrock/cluster/azure/vnet"
   vnet_name                = "${var.vnet_name}"
   address_space            = "${var.address_space}"
   resource_group_name      = "${module.service_plan.resource_group_name}"
