@@ -87,7 +87,8 @@ module "app_gateway" {
   resource_group_name                       = "${module.service_plan.resource_group_name}"
   appgateway_ipconfig_name                  = "${var.appgateway_ipconfig_name}"
   appgateway_frontend_port_name             = "${var.appgateway_frontend_port_name}"
-  appgateway_frontend_ip_configuration_name = "${var.appgateway_frontend_ip_configuration_name}"
+  appgateway_frontend_ip_configuration_name = "${azurerm_public_ip.pip.name}"
+
   appgateway_listener_name                  = "${var.appgateway_listener_name}"
   appgateway_request_routing_rule_name      = "${var.appgateway_listener_name}"
   appgateway_backend_http_setting_name      = "${var.appgateway_backend_http_setting_name}"
