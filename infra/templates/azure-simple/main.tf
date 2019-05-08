@@ -82,19 +82,20 @@ resource "azurerm_public_ip" "pip" {
 }
 
 module "app_gateway" {
-  source                                    = "../../modules/providers/azure/app-gateway"
-  appgateway_name                           = "${var.appgateway_name}"
-  resource_group_name                       = "${module.service_plan.resource_group_name}"
-  appgateway_ipconfig_name                  = "${var.appgateway_ipconfig_name}"
-  appgateway_frontend_port_name             = "${var.appgateway_frontend_port_name}"
-  appgateway_frontend_ip_configuration_name = "${azurerm_public_ip.pip.name}"
-
-  appgateway_listener_name                  = "${var.appgateway_listener_name}"
-  appgateway_request_routing_rule_name      = "${var.appgateway_listener_name}"
-  appgateway_backend_http_setting_name      = "${var.appgateway_backend_http_setting_name}"
-  appgateway_backend_address_pool_name      = "${var.appgateway_backend_address_pool_name}"
-  virtual_network_name                      = "${module.vnet.vnet_name}"
-  subnet_name                               = "${var.subnet_names[0]}"
+  source                                      = "../../modules/providers/azure/app-gateway"
+  appgateway_name                             = "${var.appgateway_name}"
+  resource_group_name                         = "${module.service_plan.resource_group_name}"
+  appgateway_ipconfig_name                    = "${var.appgateway_ipconfig_name}"
+  appgateway_frontend_port_name               = "${var.appgateway_frontend_port_name}"
+  appgateway_frontend_ip_configuration_name   = "${azurerm_public_ip.pip.name}"
+  appgateway_listener_name                    = "${var.appgateway_listener_name}"
+  appgateway_request_routing_rule_name        = "${var.appgateway_listener_name}"
+  appgateway_backend_http_setting_name        = "${var.appgateway_backend_http_setting_name}"
+  appgateway_backend_address_pool_name        = "${var.appgateway_backend_address_pool_name}"
+  # TODO: APIM needs to return the private ip
+  appgateway_backend_address_pool_ipaddresses = ["10.0.2.6"] # ${module.api_manager.private_ips}
+  virtual_network_name                        = "${module.vnet.vnet_name}"
+  subnet_name                                 = "${var.subnet_names[0]}"
 
   resource_tags = {
     environment = "${var.name}-single-region"
