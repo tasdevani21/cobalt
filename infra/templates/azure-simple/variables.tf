@@ -160,7 +160,8 @@ variable "appgateway_frontend_port_name" {
 }
 
 variable "appgateway_frontend_ip_configuration_name" {
-  description = "Name that will be gfiven to the configuration for the front-end ip"
+  description = "Name that will be given to the Application Gateway frontend public ip"
+  default = "application_gateway_public_ip"
 }
 
 variable "appgateway_listener_name" {
