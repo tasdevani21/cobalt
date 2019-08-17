@@ -5,6 +5,7 @@ import (
 	"github.com/microsoft/cobalt/test-harness/infratests"
 	"github.com/microsoft/cobalt/test-harness/terratest-extensions/modules/azure"
 	"github.com/stretchr/testify/require"
+	"strings"
 	"testing"
 )
 
@@ -44,7 +45,7 @@ func verifyCorrectDeploymentTargetForApps(goTest *testing.T, output infratests.T
 		expectedImageName := unauthn_deploymentTargets[appIndex]["image_name"]
 		expectedImageTagPrefix := unauthn_deploymentTargets[appIndex]["image_release_tag_prefix"]
 
-		if expectedImageName == "" {
+		if strings.Contains(linuxFxVersion, fmt.Sprintf("%s:%s-%s", expectedImageName, expectedImageTagPrefix, workspace)) != true {
 			expectedImageName = authn_deploymentTargets[appIndex]["image_name"]
 			expectedImageTagPrefix = authn_deploymentTargets[appIndex]["image_release_tag_prefix"]
 		}
