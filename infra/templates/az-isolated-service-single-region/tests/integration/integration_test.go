@@ -70,8 +70,8 @@ func TestAzureSimple(t *testing.T) {
 		ExpectedTfOutputCount: 9,
 		ExpectedTfOutput: infratests.TerraformOutput{
 			"fqdns": []string{
-				"http://co-frontend-api-1-" + workspace + "." + aseName + ".p.azurewebsites.net",
 				"http://co-backend-api-1-" + workspace + "." + aseName + ".p.azurewebsites.net",
+				"http://co-frontend-api-1-" + workspace + "." + aseName + ".p.azurewebsites.net",
 			},
 		},
 		TfOutputAssertions: []infratests.TerraformOutputValidation{
