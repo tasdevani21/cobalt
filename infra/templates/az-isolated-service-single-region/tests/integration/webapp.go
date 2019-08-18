@@ -45,17 +45,17 @@ func verifyCorrectDeploymentTargetForApps(goTest *testing.T, output infratests.T
 		var expectedImageName string = ""
 		var expectedImageTagPrefix string = ""
 
-		for deploy_target := range unauthn_deploymentTargets {
-			if strings.Contains(linuxFxVersion, fmt.Sprintf("%s:%s-%s", deploy_target["image_name"], deploy_target["image_release_tag_prefix"], workspace)) {
-				expectedImageName = deploy_target["image_name"]
-				expectedImageTagPrefix = deploy_target["image_release_tag_prefix"]
+		for targetIndex := range unauthn_deploymentTargets {
+			if strings.Contains(linuxFxVersion, fmt.Sprintf("%s:%s-%s", unauthn_deploymentTargets[targetIndex]["image_name"], unauthn_deploymentTargets[targetIndex]["image_release_tag_prefix"], workspace)) {
+				expectedImageName = unauthn_deploymentTargets[targetIndex]["image_name"]
+				expectedImageTagPrefix = unauthn_deploymentTargets[targetIndex]["image_release_tag_prefix"]
 			}
 		}
 
-		for deploy_target := range authn_deploymentTargets {
-			if strings.Contains(linuxFxVersion, fmt.Sprintf("%s:%s-%s", deploy_target["image_name"], deploy_target["image_release_tag_prefix"], workspace)) {
-				expectedImageName = deploy_target["image_name"]
-				expectedImageTagPrefix = deploy_target["image_release_tag_prefix"]
+		for targetIndex := range authn_deploymentTargets {
+			if strings.Contains(linuxFxVersion, fmt.Sprintf("%s:%s-%s", authn_deploymentTargets[targetIndex]["image_name"], authn_deploymentTargets[targetIndex]["image_release_tag_prefix"], workspace)) {
+				expectedImageName = authn_deploymentTargets[targetIndex]["image_name"]
+				expectedImageTagPrefix = authn_deploymentTargets[targetIndex]["image_release_tag_prefix"]
 			}
 		}
 
