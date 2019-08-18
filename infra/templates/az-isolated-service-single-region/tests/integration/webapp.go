@@ -38,8 +38,8 @@ func verifyCorrectDeploymentTargetForApps(goTest *testing.T, output infratests.T
 	adminResourceGroup := output["admin_resource_group"].(string)
 	acrName := output["acr_name"].(string)
 
-	for appIndex, appName := range output["webapp_names"].([]interface{}) {
-		appConfig := azure.WebAppSiteConfiguration(goTest, adminSubscription, adminResourceGroup, appName.(string))
+	for appIndex := range output["webapp_names"].([]interface{}) {
+		appConfig := azure.WebAppSiteConfiguration(goTest, adminSubscription, adminResourceGroup, output["webapp_names"][appIndex].(string))
 		linuxFxVersion := *appConfig.LinuxFxVersion
 
 		var expectedImageName string = ""
