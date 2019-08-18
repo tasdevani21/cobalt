@@ -47,14 +47,14 @@ func verifyCorrectDeploymentTargetForApps(goTest *testing.T, output infratests.T
 		var expectedImageTagPrefix string = ""
 
 		for targetIndex := range unauthn_deploymentTargets {
-			if strings.Contains(linuxFxVersion, fmt.Sprintf("%s:%s-%s", unauthn_deploymentTargets[targetIndex]["image_name"], unauthn_deploymentTargets[targetIndex]["image_release_tag_prefix"], workspace)) {
+			if strings.Contains(linuxFxVersion, fmt.Sprintf("%s:%s", unauthn_deploymentTargets[targetIndex]["image_name"], unauthn_deploymentTargets[targetIndex]["image_release_tag_prefix"])) {
 				expectedImageName = unauthn_deploymentTargets[targetIndex]["image_name"]
 				expectedImageTagPrefix = unauthn_deploymentTargets[targetIndex]["image_release_tag_prefix"]
 			}
 		}
 
 		for targetIndex := range authn_deploymentTargets {
-			if strings.Contains(linuxFxVersion, fmt.Sprintf("%s:%s-%s", authn_deploymentTargets[targetIndex]["image_name"], authn_deploymentTargets[targetIndex]["image_release_tag_prefix"], workspace)) {
+			if strings.Contains(linuxFxVersion, fmt.Sprintf("%s:%s", authn_deploymentTargets[targetIndex]["image_name"], authn_deploymentTargets[targetIndex]["image_release_tag_prefix"])) {
 				expectedImageName = authn_deploymentTargets[targetIndex]["image_name"]
 				expectedImageTagPrefix = authn_deploymentTargets[targetIndex]["image_release_tag_prefix"]
 			}
@@ -62,11 +62,10 @@ func verifyCorrectDeploymentTargetForApps(goTest *testing.T, output infratests.T
 
 		expectedAcr := acrName + ".azurecr.io"
 		expectedLinuxFxVersion := fmt.Sprintf(
-			"DOCKER|%s/%s:%s-%s",
+			"DOCKER|%s/%s:%s",
 			expectedAcr,
 			expectedImageName,
-			expectedImageTagPrefix,
-			workspace)
+			expectedImageTagPrefix)
 
 		require.Equal(goTest, expectedLinuxFxVersion, linuxFxVersion)
 	}
