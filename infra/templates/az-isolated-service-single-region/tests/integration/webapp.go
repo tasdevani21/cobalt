@@ -42,12 +42,21 @@ func verifyCorrectDeploymentTargetForApps(goTest *testing.T, output infratests.T
 		appConfig := azure.WebAppSiteConfiguration(goTest, adminSubscription, adminResourceGroup, appName.(string))
 		linuxFxVersion := *appConfig.LinuxFxVersion
 
-		expectedImageName := unauthn_deploymentTargets[appIndex]["image_name"]
-		expectedImageTagPrefix := unauthn_deploymentTargets[appIndex]["image_release_tag_prefix"]
+		var expectedImageName string = ""
+		var expectedImageTagPrefix string = ""
 
-		if strings.Contains(linuxFxVersion, fmt.Sprintf("%s:%s-%s", expectedImageName, expectedImageTagPrefix, workspace)) != true {
-			expectedImageName = authn_deploymentTargets[appIndex]["image_name"]
-			expectedImageTagPrefix = authn_deploymentTargets[appIndex]["image_release_tag_prefix"]
+		for deploy_target := range unauthn_deploymentTargets.([]interface{}) {
+			if strings.Contains(linuxFxVersion, fmt.Sprintf("%s:%s-%s", deploy_target["image_name"], deploy_target["image_release_tag_prefix"], workspace)) {
+				expectedImageName = deploy_target["image_name"]
+				expectedImageTagPrefix = deploy_target["image_release_tag_prefix"]
+			}
+		}
+
+		for deploy_target := range authn_deploymentTargets.([]interface{}) {
+			if strings.Contains(linuxFxVersion, fmt.Sprintf("%s:%s-%s", deploy_target["image_name"], deploy_target["image_release_tag_prefix"], workspace)) {
+				expectedImageName = deploy_target["image_name"]
+				expectedImageTagPrefix = deploy_target["image_release_tag_prefix"]
+			}
 		}
 
 		expectedAcr := acrName + ".azurecr.io"
