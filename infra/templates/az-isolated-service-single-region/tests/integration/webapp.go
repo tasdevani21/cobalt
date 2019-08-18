@@ -40,9 +40,9 @@ func verifyCorrectDeploymentTargetForApps(goTest *testing.T, output infratests.T
 
 	for appIndex, appName := range output["webapp_names"].([]interface{}) {
 		appConfig := azure.WebAppSiteConfiguration(goTest, adminSubscription, adminResourceGroup, appName.(string))
-		linuxFxVersion := *appConfig.LinuxFxVersion
+		linuxFxVersion := strings.Trim(*appConfig.LinuxFxVersion, "{}")
 
-		fmt.Println("Verifying webapp #", string(appIndex))
+		fmt.Println("Verifying webapp #", appIndex)
 		var expectedImageName string = ""
 		var expectedImageTagPrefix string = ""
 
