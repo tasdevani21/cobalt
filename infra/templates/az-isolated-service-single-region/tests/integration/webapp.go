@@ -38,7 +38,7 @@ func verifyCorrectDeploymentTargetForApps(goTest *testing.T, output infratests.T
 	adminResourceGroup := output["admin_resource_group"].(string)
 	acrName := output["acr_name"].(string)
 
-	for appIndex := range output["webapp_names"].([]interface{}) {
+	for appIndex := range output["webapp_names"] {
 		appConfig := azure.WebAppSiteConfiguration(goTest, adminSubscription, adminResourceGroup, output["webapp_names"][appIndex].(string))
 		linuxFxVersion := *appConfig.LinuxFxVersion
 
