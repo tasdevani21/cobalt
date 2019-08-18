@@ -45,14 +45,14 @@ func verifyCorrectDeploymentTargetForApps(goTest *testing.T, output infratests.T
 		var expectedImageName string = ""
 		var expectedImageTagPrefix string = ""
 
-		for deploy_target := range unauthn_deploymentTargets.([]interface{}) {
+		for deploy_target := range unauthn_deploymentTargets.([]map[string]string) {
 			if strings.Contains(linuxFxVersion, fmt.Sprintf("%s:%s-%s", deploy_target["image_name"], deploy_target["image_release_tag_prefix"], workspace)) {
 				expectedImageName = deploy_target["image_name"]
 				expectedImageTagPrefix = deploy_target["image_release_tag_prefix"]
 			}
 		}
 
-		for deploy_target := range authn_deploymentTargets.([]interface{}) {
+		for deploy_target := range authn_deploymentTargets.([]map[string]string) {
 			if strings.Contains(linuxFxVersion, fmt.Sprintf("%s:%s-%s", deploy_target["image_name"], deploy_target["image_release_tag_prefix"], workspace)) {
 				expectedImageName = deploy_target["image_name"]
 				expectedImageTagPrefix = deploy_target["image_release_tag_prefix"]
