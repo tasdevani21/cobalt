@@ -16,7 +16,7 @@ func verifyVnetIntegrationForKeyVault(goTest *testing.T, output infratests.Terra
 	vaultName := output["keyvault_name"].(string)
 	keyVaultACLs := azure.KeyVaultNetworkAcls(goTest, adminSubscription, appDevResourceGroup, vaultName)
 	verifyVnetSubnetWhitelistForKeyvault(goTest, keyVaultACLs)
-	verifyIPWhitelistForKeyvault(goTest, keyVaultACLs)
+	//verifyIPWhitelistForKeyvault(goTest, keyVaultACLs)
 }
 
 // Verify that only the correct IPs have access to the Keyvault
@@ -33,7 +33,7 @@ func verifyIPWhitelistForKeyvault(goTest *testing.T, keyVaultACLs *keyvault.Netw
 	requireEqualIgnoringOrderAndCase(goTest, ipsWithKeyvaultAccess, expectedIpsWithKeyvaultAccess)
 }
 
-// Verify that only the correct subnets have access to the ACR
+// Verify that only the correct subnets have access to the KeyVault
 func verifyVnetSubnetWhitelistForKeyvault(goTest *testing.T, keyVaultACLs *keyvault.NetworkRuleSet) {
 	subnetIDs := azure.VnetSubnetsList(goTest, adminSubscription, aseResourceGroup, aseVnetName)
 	// No azure services should have bypass rules that allow them to circumvent the VNET isolation
