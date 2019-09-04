@@ -1,8 +1,3 @@
-locals {
-  service_plan_name = "${local.prefix}-sp"
-  app_insights_name = "${local.prefix}-ai"
-}
-
 data "azurerm_container_registry" "acr" {
   name                = module.container_registry.container_registry_name
   resource_group_name = var.azure_container_resource_group == "" ? azurerm_resource_group.svcplan.name : var.azure_container_resource_group
@@ -32,14 +27,10 @@ resource "null_resource" "acr_image_deploy" {
   }
 }
 
-module "provider" {
-  source = "../../modules/providers/azure/provider"
-}
-
 module "service_plan" {
   source              = "../../modules/providers/azure/service-plan"
   resource_group_name = azurerm_resource_group.svcplan.name
-  service_plan_name   = local.service_plan_name
+  service_plan_name   = local.sp_name
 }
 
 module "app_service" {
@@ -72,7 +63,7 @@ resource "azurerm_role_assignment" "acr_pull" {
 module "app_insight" {
   source                           = "../../modules/providers/azure/app-insights"
   service_plan_resource_group_name = azurerm_resource_group.svcplan.name
-  appinsights_name                 = local.app_insights_name
+  appinsights_name                 = local.ai_name
   appinsights_application_type     = var.application_type
 }
 
