@@ -38,10 +38,12 @@ module "app_service" {
   service_plan_name                = module.service_plan.service_plan_name
   service_plan_resource_group_name = azurerm_resource_group.svcplan.name
   app_insights_instrumentation_key = module.app_insight.app_insights_instrumentation_key
+  uses_acr                         = true
   azure_container_registry_name    = module.container_registry.container_registry_name
   docker_registry_server_url       = module.container_registry.container_registry_login_server
   docker_registry_server_username  = data.azurerm_container_registry.acr.admin_username
   docker_registry_server_password  = data.azurerm_container_registry.acr.admin_password
+  uses_vnet                        = true
   vnet_name                        = module.vnet.vnet_name
   vnet_subnet_id                   = module.vnet.vnet_subnet_ids[0]
   vault_uri                        = module.keyvault.keyvault_uri
