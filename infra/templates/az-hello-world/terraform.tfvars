@@ -8,7 +8,8 @@
 
 resource_group_location = "eastus"
 name                    = "az-hello-world"
-randomization_level     = 0
+randomization_level     = 8
+
 deployment_targets = [{
   app_name                 = "cobalt-backend-api",
   image_name               = "appsvcsample/static-site",
