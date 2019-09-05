@@ -31,7 +31,7 @@ locals {
   public_pip_name  = "${local.base_name_76}-ip"                   // public IP (max 80 chars)
 
   // Resolved TF Vars
-  resolved_acr_rg_name = var.azure_container_resource_group == "" ? local.admin_rg_name : var.azure_container_resource_group
+  resolved_acr_rg_name = var.azure_container_resource_group == "" ? azurerm_resource_group.svcplan.name : var.azure_container_resource_group
   resolved_acr_name    = var.azure_container_resource_name == "" ? local.acr_name : var.azure_container_resource_name
 }
 
