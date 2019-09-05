@@ -53,7 +53,7 @@ module "service_plan" {
 module "app_service" {
   source                           = "../../modules/providers/azure/app-service"
   service_plan_name                = module.service_plan.service_plan_name
-  app_service_name                 = local.app_service_name
+  app_service_name_prefix          = local.app_svc_name_prefix
   service_plan_resource_group_name = azurerm_resource_group.admin_rg.name
   app_insights_instrumentation_key = module.app_insights.app_insights_instrumentation_key
   azure_container_registry_name    = module.container_registry.container_registry_name
@@ -74,6 +74,7 @@ module "app_service" {
 module "authn_app_service" {
   source                           = "../../modules/providers/azure/app-service"
   service_plan_name                = module.service_plan.service_plan_name
+  app_service_name_prefix          = local.auth_svc_name_prefix
   service_plan_resource_group_name = azurerm_resource_group.admin_rg.name
   app_insights_instrumentation_key = module.app_insights.app_insights_instrumentation_key
   azure_container_registry_name    = module.container_registry.container_registry_name

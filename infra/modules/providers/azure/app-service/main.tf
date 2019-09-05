@@ -18,7 +18,7 @@ data "azurerm_app_service_plan" "appsvc" {
 }
 
 resource "azurerm_app_service" "appsvc" {
-  name                = var.app_service_name
+  name                = format("%s-%s", var.app_service_name_prefix, lower(local.app_names[count.index]))
   resource_group_name = data.azurerm_resource_group.appsvc.name
   location            = data.azurerm_resource_group.appsvc.location
   app_service_plan_id = data.azurerm_app_service_plan.appsvc.id
@@ -73,7 +73,7 @@ resource "null_resource" "acr_webhook_creation" {
 
 resource "azurerm_app_service_slot" "appsvc_staging_slot" {
   name                = "staging"
-  app_service_name    = var.app_service_name
+  app_service_name    = format("%s-%s", var.app_service_name_prefix, lower(local.app_names[count.index]))
   count               = length(local.app_names)
   location            = data.azurerm_resource_group.appsvc.location
   resource_group_name = data.azurerm_resource_group.appsvc.name
@@ -93,7 +93,7 @@ resource "azurerm_template_deployment" "access_restriction" {
   resource_group_name = data.azurerm_resource_group.appsvc.name
 
   parameters = {
-    service_name                   = var.app_service_name
+    service_name                   = format("%s-%s", var.app_service_name_prefix, lower(local.app_names[count.index]))
     vnet_subnet_id                 = var.vnet_subnet_id
     access_restriction_name        = local.access_restriction_name
     access_restriction_description = local.access_restriction_description
