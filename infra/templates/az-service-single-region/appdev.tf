@@ -1,6 +1,6 @@
 data "azurerm_container_registry" "acr" {
-  name                = module.container_registry.container_registry_name
-  resource_group_name = var.azure_container_resource_group == "" ? azurerm_resource_group.svcplan.name : var.azure_container_resource_group
+  name                = local.resolved_acr_name
+  resource_group_name = local.resolved_acr_rg_name
   depends_on          = ["azurerm_resource_group.svcplan", "module.container_registry"]
 }
 
