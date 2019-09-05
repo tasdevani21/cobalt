@@ -4,7 +4,7 @@ module "provider" {
 
 locals {
   // sanitize names
-  app_id  = replace(trimspace(lower(var.prefix)), "_", "-")
+  app_id  = replace(trimspace(lower(var.name)), "_", "-")
   region = replace(trimspace(lower(var.resource_group_location)), "_", "-")
   ws_name = replace(trimspace(lower(terraform.workspace)), "_", "-")
 

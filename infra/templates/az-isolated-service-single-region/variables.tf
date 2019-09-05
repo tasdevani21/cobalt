@@ -1,12 +1,12 @@
 // ---- General Configuration ----
 
-variable "resource_group_location" {
-  description = "The deployment location of resource group container all the resources"
+variable "name" {
+  description = "An identifier used to construct the names of all resources in this template."
   type        = string
 }
 
-variable "name" {
-  description = "The name of the deployment. This will be used across the resource created in this solution"
+variable "resource_group_location" {
+  description = "The Azure region where all resources in this template should be created."
   type        = string
 }
 

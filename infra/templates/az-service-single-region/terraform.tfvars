@@ -3,7 +3,7 @@
 # responsibility to choose the values that make sense for your application.
 #
 # Note: These values will impact the names of resources. If your deployment
-# fails due to a resource name colision, consider using different values for
+# fails due to a resource name collision, consider using different values for
 # the `name` variable.
 
 resource_group_location = "eastus"

@@ -1,12 +1,18 @@
-variable "prefix" {
-  description = "The prefix used for all resources in this example"
+// ---- General Configuration ----
+
+variable "name" {
+  description = "An identifier used to construct the names of all resources in this template."
   type        = string
 }
 
 variable "resource_group_location" {
-  description = "The Azure location where all resources in this example should be created."
+  description = "The Azure region where all resources in this template should be created."
   type        = string
 }
+
+
+
+// ---- App Service Configuration ----
 
 variable "deployment_targets" {
   description = "Metadata about apps to deploy, such as image metadata."
