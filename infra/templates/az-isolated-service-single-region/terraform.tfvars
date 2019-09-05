@@ -4,7 +4,11 @@
 #
 # Note: These values will impact the names of resources. If your deployment
 # fails due to a resource name collision, consider using different values for
-# the `name` variable.
+# the `name` variable or increasing the value for `randomization_level`.
+
+resource_group_location = "eastus2"
+name                    = "isolated-service"
+randomization_level     = 8
 
 authn_deployment_targets = [
   {
@@ -30,7 +34,5 @@ unauthn_deployment_targets = [
 # known DNS address
 resource_ip_whitelist   = ["13.107.6.0/24", "13.107.9.0/24", "13.107.42.0/24", "13.107.43.0/24", "40.74.0.0/15", "40.76.0.0/14", "40.80.0.0/12", "40.96.0.0/12", "40.112.0.0/13", "40.120.0.0/14", "40.124.0.0/16", "40.125.0.0/17"]
 ase_name                = "co-static-ase"
-name                    = "isolated-service"
 ase_resource_group      = "co-static-ase-rg"
 ase_vnet_name           = "co-static-ase-vnet"
-resource_group_location = "eastus2"
