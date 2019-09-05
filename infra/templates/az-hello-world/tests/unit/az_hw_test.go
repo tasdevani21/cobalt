@@ -31,7 +31,7 @@ func TestAzureSimple(t *testing.T) {
 	testFixture := infratests.UnitTestFixture{
 		GoTest:                t,
 		TfOptions:             tfOptions,
-		ExpectedResourceCount: 9,
+		ExpectedResourceCount: 10,
 		PlanAssertions:        nil,
 		Workspace:             workspace,
 		ExpectedResourceAttributeValues: infratests.ResourceDescription{
