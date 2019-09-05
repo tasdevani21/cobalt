@@ -8,6 +8,11 @@ variable "service_plan_name" {
   type        = string
 }
 
+variable "app_service_name_prefix" {
+  description = "String value prepended to the name of each app service"
+  type        = string
+}
+
 variable "uses_acr" {
   description = "Determines whether or not an Azure container registry is being used"
   type        = bool
