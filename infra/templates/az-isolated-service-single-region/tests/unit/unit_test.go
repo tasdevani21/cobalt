@@ -65,17 +65,13 @@ func asMap(t *testing.T, jsonString string) map[string]interface{} {
 func TestTemplate(t *testing.T) {
 	expectedStagingSlot := asMap(t, `{"name":"staging"}`)
 	expectedAppDevResourceGroup := asMap(t, `{
-		"name":     "isolated-service-`+workspace+`-app-rg",
 		"location": "`+region+`"
 	}`)
 	expectedAdminResourceGroup := asMap(t, `{
-		"name":     "isolated-service-`+workspace+`-admin-rg",
 		"location": "`+region+`"
 	}`)
 	expectedAppInsights := asMap(t, `{
-		"name":                "isolated-service-`+workspace+`-ai",
 		"application_type":    "Web",
-		"resource_group_name": "isolated-service-`+workspace+`-admin-rg"
 	}`)
 	// expectedKeyVault := asMap(t, `{
 	// 	"network_acls": [{
@@ -151,9 +147,7 @@ func TestTemplate(t *testing.T) {
 	expectedAppServicePlan := asMap(t, `{
 		"app_service_environment_id": "`+expectedAppServiceEnvID+`", 
 		"kind":                       "Linux",
-		"name":                       "isolated-service-`+workspace+`-sp",
 		"reserved":                   true,
-		"resource_group_name":        "isolated-service-`+workspace+`-admin-rg",
 		"sku": [{ "capacity": 1, "size": "I1", "tier": "Isolated" }]
 	}`)
 	expectedAutoScalePlan := asMap(t, `{
@@ -202,16 +196,12 @@ func TestTemplate(t *testing.T) {
 	}`)
 	expectedAppServiceSchema := `{
 		"identity": [{ "type": "SystemAssigned" }],
-		"name": "co-backend-api-%d-%s",
-		"resource_group_name": "isolated-service-%s-admin-rg",
 		"site_config": [{
 			"always_on": true
 		}]
 	}`
 	expectedAppServiceSchema2 := `{
 		"identity": [{ "type": "SystemAssigned" }],
-		"name": "co-frontend-api-%d-%s",
-		"resource_group_name": "isolated-service-%s-admin-rg",
 		"site_config": [{
 			"always_on": true
 		}]
