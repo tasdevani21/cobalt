@@ -56,14 +56,12 @@ resource "null_resource" "acr_webhook_creation" {
   }
 
   provisioner "local-exec" {
-    command = "az acr webhook create --registry $ACRNAME --name $APPNAME$WRKSPACE$WEBHOOKNAME --actions push --uri $(az webapp deployment container show-cd-url -n $APPNAME_URL-$WRKSPACE_URL -g $APPSVCNAME --query CI_CD_URL -o tsv)"
+    command = "az acr webhook create --registry $ACRNAME --name $APPNAME$WEBHOOKNAME --actions push --uri $(az webapp deployment container show-cd-url -n $APPNAME_URL -g $APPSVCNAME --query CI_CD_URL -o tsv)"
 
     environment = {
       ACRNAME      = var.azure_container_registry_name
-      APPNAME      = replace(lower(local.app_names[count.index]), "-", "")
-      WRKSPACE     = replace(lower(terraform.workspace), "-", "")
-      APPNAME_URL  = lower(local.app_names[count.index])
-      WRKSPACE_URL = lower(terraform.workspace)
+      APPNAME      = replace(format("%s-%s", var.app_service_name_prefix, lower(local.app_names[count.index])), "-", "")
+      APPNAME_URL  = format("%s-%s", var.app_service_name_prefix, lower(local.app_names[count.index]))
       WEBHOOKNAME  = local.acr_webhook_name
       APPSVCNAME   = data.azurerm_resource_group.appsvc.name
     }

@@ -127,9 +127,9 @@ resource "null_resource" "auth" {
 
     environment = {
       RES_GRP = azurerm_resource_group.admin_rg.name
-      APPNAME = module.authn_app_service.app_service_config_data[count.index].name
+      APPNAME = format("%s-%s", local.app_svc_name_prefix, module.authn_app_service.app_service_config_data[count.index].name)
       ISSUER  = format("https://sts.windows.net/%s", local.tenant_id)
-      APPID   = module.ad_application.azuread_config_data[format("%s-%s", module.authn_app_service.app_service_config_data[count.index].name, var.auth_suffix)].application_id
+      APPID   = module.ad_application.azuread_config_data[format("%s-%s-%s", local.app_svc_name_prefix, module.authn_app_service.app_service_config_data[count.index].name, var.auth_suffix)].application_id
     }
   }
 }
