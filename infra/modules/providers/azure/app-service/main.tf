@@ -52,7 +52,7 @@ resource "null_resource" "acr_webhook_creation" {
 
   triggers = {
     images_to_deploy = "${join(",", [for config in local.app_configs : config.image])}"
-    acr_name         = var.azure_container_registry_name
+    acr_name         = var.uses_acr
   }
 
   provisioner "local-exec" {
