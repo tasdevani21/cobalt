@@ -71,7 +71,7 @@ func TestTemplate(t *testing.T) {
 		"location": "`+region+`"
 	}`)
 	expectedAppInsights := asMap(t, `{
-		"application_type":    "Web",
+		"application_type":    "Web"
 	}`)
 	// expectedKeyVault := asMap(t, `{
 	// 	"network_acls": [{
@@ -206,8 +206,8 @@ func TestTemplate(t *testing.T) {
 			"always_on": true
 		}]
 	}`
-	expectedAppService1 := asMap(t, fmt.Sprintf(expectedAppServiceSchema, 1, workspace, workspace))
-	expectedAppService2 := asMap(t, fmt.Sprintf(expectedAppServiceSchema2, 1, workspace, workspace))
+	expectedAppService1 := asMap(t, expectedAppServiceSchema)
+	expectedAppService2 := asMap(t, expectedAppServiceSchema2)
 
 	testFixture := infratests.UnitTestFixture{
 		GoTest:                t,
