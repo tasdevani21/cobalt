@@ -36,7 +36,6 @@ func TestAzureSimple(t *testing.T) {
 		Workspace:             workspace,
 		ExpectedResourceAttributeValues: infratests.ResourceDescription{
 			"module.app_service.azurerm_app_service.appsvc[0]": map[string]interface{}{
-				"resource_group_name": prefix,
 				"app_settings": map[string]interface{}{
 					"WEBSITES_ENABLE_APP_SERVICE_STORAGE": "false",
 				},
@@ -53,7 +52,6 @@ func TestAzureSimple(t *testing.T) {
 			},
 			"azurerm_resource_group.main": map[string]interface{}{
 				"location": datacenter,
-				"name":     prefix,
 			},
 		},
 	}
