@@ -56,6 +56,7 @@ module "app_service" {
   app_service_name_prefix          = local.app_svc_name_prefix
   service_plan_resource_group_name = azurerm_resource_group.admin_rg.name
   app_insights_instrumentation_key = module.app_insights.app_insights_instrumentation_key
+  uses_acr                         = true
   azure_container_registry_name    = module.container_registry.container_registry_name
   docker_registry_server_url       = module.container_registry.container_registry_login_server
   docker_registry_server_username  = module.acr_service_principal_acrpull.service_principal_application_id
@@ -77,6 +78,7 @@ module "authn_app_service" {
   app_service_name_prefix          = local.auth_svc_name_prefix
   service_plan_resource_group_name = azurerm_resource_group.admin_rg.name
   app_insights_instrumentation_key = module.app_insights.app_insights_instrumentation_key
+  uses_acr                         = true
   azure_container_registry_name    = module.container_registry.container_registry_name
   docker_registry_server_url       = module.container_registry.container_registry_login_server
   docker_registry_server_username  = module.container_registry.admin_username
