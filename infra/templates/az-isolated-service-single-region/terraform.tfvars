@@ -36,3 +36,4 @@ resource_ip_whitelist = ["13.107.6.0/24", "13.107.9.0/24", "13.107.42.0/24", "13
 ase_name              = "co-static-ase"
 ase_resource_group    = "co-static-ase-rg"
 ase_vnet_name         = "co-static-ase-vnet"
+service_plan_size     = "S1"

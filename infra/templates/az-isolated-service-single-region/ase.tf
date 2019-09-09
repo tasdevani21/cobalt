@@ -41,10 +41,10 @@ module "service_plan" {
   resource_group_name        = azurerm_resource_group.admin_rg.name
   service_plan_name          = local.sp_name
   scaling_rules              = var.scaling_rules
-  service_plan_tier          = "Isolated"
+  //service_plan_tier          = "Isolated"
   service_plan_size          = var.service_plan_size
   service_plan_kind          = var.service_plan_kind
-  app_service_environment_id = local.ase_id
+  //app_service_environment_id = local.ase_id
   providers = {
     "azurerm" = "azurerm.admin"
   }
@@ -123,7 +123,7 @@ resource "null_resource" "auth" {
   }
 
   provisioner "local-exec" {
-    command = "az webapp auth update -g $RES_GRP -n $APPNAME --enabled true --action LoginWithAzureActiveDirectory --aad-token-issuer-url \"$ISSUER\" --aad-client-id \"$APPID\""
+    command = "az webapp auth update -g \"$RES_GRP\" -n $APPNAME --enabled true --action LoginWithAzureActiveDirectory --aad-token-issuer-url \"$ISSUER\" --aad-client-id \"$APPID\""
 
     environment = {
       RES_GRP = azurerm_resource_group.admin_rg.name
