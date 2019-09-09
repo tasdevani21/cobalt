@@ -18,7 +18,7 @@ var tfOptions = &terraform.Options{
 	TerraformDir: "../../",
 	Upgrade:      true,
 	Vars: map[string]interface{}{
-		"name":                    prefix,
+		"name": prefix,
 		"resource_group_location": datacenter,
 	},
 	BackendConfig: map[string]interface{}{

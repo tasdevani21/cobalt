@@ -144,7 +144,7 @@ func TestTemplate(t *testing.T) {
 	// 	aseResourceGroup,
 	// 	aseName)
 	// expectedAppServicePlan := asMap(t, `{
-	// 	"app_service_environment_id": "`+expectedAppServiceEnvID+`", 
+	// 	"app_service_environment_id": "`+expectedAppServiceEnvID+`",
 	// 	"kind":                       "Linux",
 	// 	"reserved":                   true,
 	// 	"sku": [{ "capacity": 1, "size": "I1", "tier": "Isolated" }]
@@ -205,8 +205,8 @@ func TestTemplate(t *testing.T) {
 	// 		"always_on": true
 	// 	}]
 	// }`
-//	expectedAppService1 := asMap(t, expectedAppServiceSchema)
-//	expectedAppService2 := asMap(t, expectedAppServiceSchema2)
+	//	expectedAppService1 := asMap(t, expectedAppServiceSchema)
+	//	expectedAppService2 := asMap(t, expectedAppServiceSchema2)
 
 	testFixture := infratests.UnitTestFixture{
 		GoTest:                t,
