@@ -60,7 +60,7 @@ resource "null_resource" "acr_webhook_creation" {
 
     environment = {
       ACRNAME     = var.azure_container_registry_name
-      APPNAME     = lower(local.app_names[count.index]))
+      APPNAME     = lower(local.app_names[count.index])
       APPNAME_URL = format("%s-%s", var.app_service_name_prefix, lower(local.app_names[count.index]))
       WEBHOOKNAME = local.acr_webhook_name
       APPSVCNAME  = data.azurerm_resource_group.appsvc.name

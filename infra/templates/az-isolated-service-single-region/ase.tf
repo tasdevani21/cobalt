@@ -37,13 +37,13 @@ module "app_insights" {
 
 
 module "service_plan" {
-  source                     = "../../modules/providers/azure/service-plan"
-  resource_group_name        = azurerm_resource_group.admin_rg.name
-  service_plan_name          = local.sp_name
-  scaling_rules              = var.scaling_rules
+  source              = "../../modules/providers/azure/service-plan"
+  resource_group_name = azurerm_resource_group.admin_rg.name
+  service_plan_name   = local.sp_name
+  scaling_rules       = var.scaling_rules
   //service_plan_tier          = "Isolated"
-  service_plan_size          = var.service_plan_size
-  service_plan_kind          = var.service_plan_kind
+  service_plan_size = var.service_plan_size
+  service_plan_kind = var.service_plan_kind
   //app_service_environment_id = local.ase_id
   providers = {
     "azurerm" = "azurerm.admin"
