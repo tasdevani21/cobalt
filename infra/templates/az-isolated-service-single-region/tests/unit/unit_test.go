@@ -2,7 +2,6 @@ package test
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"strings"
 	"testing"
@@ -63,7 +62,7 @@ func asMap(t *testing.T, jsonString string) map[string]interface{} {
 }
 
 func TestTemplate(t *testing.T) {
-	expectedStagingSlot := asMap(t, `{"name":"staging"}`)
+	// expectedStagingSlot := asMap(t, `{"name":"staging"}`)
 	expectedAppDevResourceGroup := asMap(t, `{
 		"location": "`+region+`"
 	}`)
@@ -139,75 +138,75 @@ func TestTemplate(t *testing.T) {
 	// 		]
 	// 	}]
 	// }`)
-	expectedAppServiceEnvID := fmt.Sprintf(
-		"/subscriptions/%s/resourceGroups/%s/providers/Microsoft.Web/hostingEnvironments/%s",
-		adminSubscription,
-		aseResourceGroup,
-		aseName)
-	expectedAppServicePlan := asMap(t, `{
-		"app_service_environment_id": "`+expectedAppServiceEnvID+`", 
-		"kind":                       "Linux",
-		"reserved":                   true,
-		"sku": [{ "capacity": 1, "size": "I1", "tier": "Isolated" }]
-	}`)
-	expectedAutoScalePlan := asMap(t, `{
-		"enabled": true,
-		"notification": [{
-			"email": [{
-				"send_to_subscription_administrator":    true,
-				"send_to_subscription_co_administrator": true
-			}]
-		}],
-		"profile": [{
-			"rule": [{
-				"metric_trigger": [{
-					"metric_name":      "CpuPercentage",
-					"operator":         "GreaterThan",
-					"statistic":        "Average",
-					"threshold":        70,
-					"time_aggregation": "Average",
-					"time_grain":       "PT1M",
-					"time_window":      "PT5M"
-				}],
-				"scale_action": [{
-					"cooldown":  "PT10M",
-					"direction": "Increase",
-					"type":      "ChangeCount",
-					"value":     1
-				}]
-			  },{
-				"metric_trigger": [{
-					"metric_name":      "CpuPercentage",
-					"operator":         "GreaterThan",
-					"statistic":        "Average",
-					"threshold":        25,
-					"time_aggregation": "Average",
-					"time_grain":       "PT1M",
-					"time_window":      "PT5M"
-				}],
-				"scale_action": [{
-					"cooldown":  "PT1M",
-					"direction": "Decrease",
-					"type":      "ChangeCount",
-					"value":     1
-				}]
-			}]
-		}]
-	}`)
-	expectedAppServiceSchema := `{
-		"identity": [{ "type": "SystemAssigned" }],
-		"site_config": [{
-			"always_on": true
-		}]
-	}`
-	expectedAppServiceSchema2 := `{
-		"identity": [{ "type": "SystemAssigned" }],
-		"site_config": [{
-			"always_on": true
-		}]
-	}`
-	expectedAppService1 := asMap(t, expectedAppServiceSchema)
-	expectedAppService2 := asMap(t, expectedAppServiceSchema2)
+	// expectedAppServiceEnvID := fmt.Sprintf(
+	// 	"/subscriptions/%s/resourceGroups/%s/providers/Microsoft.Web/hostingEnvironments/%s",
+	// 	adminSubscription,
+	// 	aseResourceGroup,
+	// 	aseName)
+	// expectedAppServicePlan := asMap(t, `{
+	// 	"app_service_environment_id": "`+expectedAppServiceEnvID+`", 
+	// 	"kind":                       "Linux",
+	// 	"reserved":                   true,
+	// 	"sku": [{ "capacity": 1, "size": "I1", "tier": "Isolated" }]
+	// }`)
+	// expectedAutoScalePlan := asMap(t, `{
+	// 	"enabled": true,
+	// 	"notification": [{
+	// 		"email": [{
+	// 			"send_to_subscription_administrator":    true,
+	// 			"send_to_subscription_co_administrator": true
+	// 		}]
+	// 	}],
+	// 	"profile": [{
+	// 		"rule": [{
+	// 			"metric_trigger": [{
+	// 				"metric_name":      "CpuPercentage",
+	// 				"operator":         "GreaterThan",
+	// 				"statistic":        "Average",
+	// 				"threshold":        70,
+	// 				"time_aggregation": "Average",
+	// 				"time_grain":       "PT1M",
+	// 				"time_window":      "PT5M"
+	// 			}],
+	// 			"scale_action": [{
+	// 				"cooldown":  "PT10M",
+	// 				"direction": "Increase",
+	// 				"type":      "ChangeCount",
+	// 				"value":     1
+	// 			}]
+	// 		  },{
+	// 			"metric_trigger": [{
+	// 				"metric_name":      "CpuPercentage",
+	// 				"operator":         "GreaterThan",
+	// 				"statistic":        "Average",
+	// 				"threshold":        25,
+	// 				"time_aggregation": "Average",
+	// 				"time_grain":       "PT1M",
+	// 				"time_window":      "PT5M"
+	// 			}],
+	// 			"scale_action": [{
+	// 				"cooldown":  "PT1M",
+	// 				"direction": "Decrease",
+	// 				"type":      "ChangeCount",
+	// 				"value":     1
+	// 			}]
+	// 		}]
+	// 	}]
+	// }`)
+	// expectedAppServiceSchema := `{
+	// 	"identity": [{ "type": "SystemAssigned" }],
+	// 	"site_config": [{
+	// 		"always_on": true
+	// 	}]
+	// }`
+	// expectedAppServiceSchema2 := `{
+	// 	"identity": [{ "type": "SystemAssigned" }],
+	// 	"site_config": [{
+	// 		"always_on": true
+	// 	}]
+	// }`
+//	expectedAppService1 := asMap(t, expectedAppServiceSchema)
+//	expectedAppService2 := asMap(t, expectedAppServiceSchema2)
 
 	testFixture := infratests.UnitTestFixture{
 		GoTest:                t,
