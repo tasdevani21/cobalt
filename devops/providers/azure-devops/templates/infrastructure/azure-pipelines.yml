@@ -27,7 +27,6 @@ stages:
   parameters:
     environments:
     - 'devint'
-    - 'qa'
 
     configurationMatrix:
     - jobName: template_deployment
